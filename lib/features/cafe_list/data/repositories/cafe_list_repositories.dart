@@ -14,7 +14,7 @@ class CafeListRepositories {
     }).catchError((error) => throw error);
   }
 
-  Future<List<CafeDetail>> getCafeList() async {
+  Future<List<CafeDetail>?> getCafeList() async {
     return _local.getCafeList();
   }
 }

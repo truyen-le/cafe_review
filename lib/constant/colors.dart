@@ -12,6 +12,7 @@ class AppColors {
   static const error = Color(0xFFB00020);
 
   static const Map<int, Color> shade = {
+    10: Color(0xFFC8CFD9),
     40: Color(0xFFA8A8A8),
     60: Color(0xFF606060),
     70: Color(0xFF363837),

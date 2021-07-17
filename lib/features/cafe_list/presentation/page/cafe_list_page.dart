@@ -1,6 +1,7 @@
 import 'package:cafe_review/constant/colors.dart';
 import 'package:cafe_review/core/sl/injection.dart';
 import 'package:cafe_review/core/util/location.dart';
+import 'package:cafe_review/features/cafe_detail/cafe_detail.dart';
 import 'package:cafe_review/features/cafe_list/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +35,25 @@ class _CafeListPageState extends State<CafeListPage> {
     );
   }
 
+  Widget _buildError(BuildContext context, String message) {
+    return Container(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline_outlined,
+              color: AppColors.error,
+              size: 24,
+            ),
+            Text(message),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildBody(BuildContext context, Position position) {
     return BlocBuilder<CafeListBloc, CafeListState>(
       builder: (context, state) {
@@ -43,6 +63,10 @@ class _CafeListPageState extends State<CafeListPage> {
         }
         if (state is CafeListLoading) {
           return _buildLoading(context, 'Getting nearby Cafe shop...');
+        }
+        if (state is CafeListLoadingError) {
+          return _buildError(
+              context, 'Unable to get nearby Cafe shop. Try again later');
         }
         if (state is CafeListLoadingFinished) {
           return Container(
@@ -58,7 +82,12 @@ class _CafeListPageState extends State<CafeListPage> {
                 return CafeListCard(
                   detail: detail,
                   distance: distance,
-                  onTap: () {},
+                  onTap: () {
+                    // Navigator.push(context,
+                    //     CafeDetailPage.route('ChIJN1t_tDeuEmsRUsoyG83frY4'));
+                    Navigator.push(
+                        context, CafeDetailPage.route(detail.placeId));
+                  },
                 );
               },
             ),
@@ -99,12 +128,8 @@ class _CafeListPageState extends State<CafeListPage> {
           future: _position,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Container(
-                child: Center(
-                  child: Text(
-                      'An error has occur while getting your location. Please try again later.'),
-                ),
-              );
+              return _buildError(context,
+                  'An error has occur while getting your location. Please try again later.');
             }
             if (snapshot.hasData) {
               return _buildBody(context, snapshot.data!);

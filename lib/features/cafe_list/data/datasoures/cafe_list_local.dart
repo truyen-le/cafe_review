@@ -7,7 +7,7 @@ class CafeListLocal {
 
   CafeListLocal({this.boxName = 'cafe_list'}) : _box = Hive.openBox(boxName);
 
-  Future<List<CafeDetail>> getCafeList() async {
+  Future<List<CafeDetail>?> getCafeList() async {
     final box = await _box;
     return box.get('nearby_list');
   }

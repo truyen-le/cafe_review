@@ -30,6 +30,7 @@ class CafeDetail with _$CafeDetail {
     @HiveField(7)
         required Geometry geometry,
     @JsonKey(name: 'vicinity') @HiveField(8) String? vicinity,
+    @JsonKey(name: 'opening_hours') @HiveField(9) OpeningHours? openingHours,
   }) = _CafeDetail;
 
   factory CafeDetail.fromJson(Map<String, dynamic> json) =>
@@ -77,4 +78,15 @@ class Geometry with _$Geometry {
 
   factory Geometry.fromJson(Map<String, dynamic> json) =>
       _$GeometryFromJson(json);
+}
+
+@freezed
+class OpeningHours with _$OpeningHours {
+  @HiveType(typeId: 5, adapterName: 'OpeningHoursAdapter')
+  const factory OpeningHours({
+    @JsonKey(name: 'open_now') @HiveField(0) bool? openNow,
+  }) = _OpeningHours;
+
+  factory OpeningHours.fromJson(Map<String, dynamic> json) =>
+      _$OpeningHoursFromJson(json);
 }

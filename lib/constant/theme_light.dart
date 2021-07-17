@@ -6,9 +6,10 @@ final ThemeData themeLight = ThemeData(
   backgroundColor: AppColors.background,
   primaryColor: AppColors.primary,
   primaryColorDark: AppColors.secondary,
-  accentColor: AppColors.shade[40],
+  accentColor: AppColors.shade[10],
   dividerColor: AppColors.shade[60],
   errorColor: AppColors.error,
+  canvasColor: Colors.transparent,
   textTheme: TextTheme(
     headline1: TextStyle(
       color: AppColors.shade[90],
@@ -78,6 +79,32 @@ final ThemeData themeLight = ThemeData(
       fontSize: 14.0,
     ),
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    labelStyle: TextStyle(
+      color: AppColors.shade[90],
+      fontFamily: 'Nunito',
+      fontSize: 16.0,
+    ),
+    hintStyle: TextStyle(
+      color: AppColors.shade[40],
+      fontFamily: 'Nunito',
+      fontSize: 14.0,
+    ),
+    contentPadding: const EdgeInsets.all(8.0),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: AppColors.shade[40]!),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: AppColors.primary),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: AppColors.shade[40]!),
+    ),
+    fillColor: AppColors.background,
+  ),
   cardTheme: CardTheme(
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -88,11 +115,23 @@ final ThemeData themeLight = ThemeData(
     style: ButtonStyle(
       textStyle: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.pressed)) {
-          return TextStyle(color: AppColors.background);
+          return TextStyle(
+            color: AppColors.background,
+            fontFamily: 'Nunito',
+            fontSize: 16.0,
+          );
         } else if (states.contains(MaterialState.disabled)) {
-          return TextStyle(color: AppColors.shade[40]);
+          return TextStyle(
+            color: AppColors.shade[40],
+            fontFamily: 'Nunito',
+            fontSize: 16.0,
+          );
         }
-        return TextStyle(color: AppColors.shade[40]);
+        return TextStyle(
+          color: AppColors.shade[40],
+          fontFamily: 'Nunito',
+          fontSize: 16.0,
+        );
       }),
       backgroundColor: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.pressed)) {
@@ -106,9 +145,26 @@ final ThemeData themeLight = ThemeData(
           (states) => AppColors.background.withOpacity(0.38)),
       shape: MaterialStateProperty.resolveWith(
         (states) => RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(20.0),
         ),
       ),
+    ),
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      textStyle: MaterialStateProperty.resolveWith(
+        (states) => TextStyle(
+          color: AppColors.primary,
+          fontFamily: 'Nunito',
+          fontSize: 16.0,
+        ),
+      ),
+      backgroundColor:
+          MaterialStateProperty.resolveWith((states) => Colors.transparent),
+      foregroundColor:
+          MaterialStateProperty.resolveWith((states) => AppColors.primary),
+      overlayColor: MaterialStateColor.resolveWith(
+          (states) => AppColors.primary.withOpacity(0.38)),
     ),
   ),
 );

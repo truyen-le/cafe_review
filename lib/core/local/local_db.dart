@@ -14,6 +14,13 @@ class LocalDb {
     Hive.registerAdapter(PhotoAdapter());
     Hive.registerAdapter(CoordinateAdapter());
     Hive.registerAdapter(GeometryAdapter());
+    Hive.registerAdapter(OpeningHoursAdapter());
+
+    //cafe_review
+    Hive.registerAdapter(ReviewAdapter());
+    Hive.registerAdapter(ReviewDetailAdapter());
+    Hive.registerAdapter(ReviewByCheckboxAdapter());
+    Hive.registerAdapter(ReviewByWritingAdapter());
   }
 
   void closeLocalDb() {

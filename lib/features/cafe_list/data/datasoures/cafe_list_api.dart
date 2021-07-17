@@ -14,6 +14,7 @@ class CafeListApi {
       'location': '$lat,$lng',
       'type': 'cafe',
       'rankby': 'distance',
+      'fields': 'place_id,photos,formatted_address,name,rating,types',
     };
     try {
       final res =
