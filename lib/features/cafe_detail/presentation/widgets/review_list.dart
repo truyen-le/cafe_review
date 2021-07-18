@@ -43,7 +43,7 @@ class ReviewList extends StatelessWidget {
                       reviewDetail: detail.copyWith(content: value),
                       index: index,
                     )),
-            onEditingComplete: () => context
+            onOutFocus: () => context
                 .read<CafeDetailBloc>()
                 .add(CafeDetailCheckReviewCompletion()),
           );
@@ -114,13 +114,13 @@ class _CheckboxReviewTile extends StatelessWidget {
 class _WritingReviewTile extends StatelessWidget {
   final ReviewByWriting reviewDetail;
   final ValueChanged<String>? onChange;
-  final VoidCallback? onEditingComplete;
+  final VoidCallback? onOutFocus;
 
   const _WritingReviewTile({
     Key? key,
     required this.reviewDetail,
     this.onChange,
-    this.onEditingComplete,
+    this.onOutFocus,
   }) : super(key: key);
 
   @override
@@ -139,12 +139,18 @@ class _WritingReviewTile extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Divider(),
-            TextFormField(
-              initialValue: reviewDetail.content,
-              maxLines: 4,
-              minLines: 1,
-              onChanged: onChange,
-              onEditingComplete: onEditingComplete,
+            Focus(
+              child: TextFormField(
+                initialValue: reviewDetail.content,
+                maxLines: 4,
+                minLines: 1,
+                onChanged: onChange,
+              ),
+              onFocusChange: (focus) {
+                if (onOutFocus != null && !focus) {
+                  onOutFocus!();
+                }
+              },
             )
           ],
         ),
