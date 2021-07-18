@@ -105,6 +105,11 @@ final ThemeData themeLight = ThemeData(
     ),
     fillColor: AppColors.background,
   ),
+  checkboxTheme: CheckboxThemeData(
+    fillColor: MaterialStateProperty.resolveWith((states) => AppColors.primary),
+    checkColor:
+        MaterialStateProperty.resolveWith((states) => AppColors.background),
+  ),
   cardTheme: CardTheme(
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

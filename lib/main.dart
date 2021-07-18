@@ -25,6 +25,7 @@ class CafeReviewApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cafe Review',
+      debugShowCheckedModeBanner: false,
       theme: themeLight,
       home: CafeListPage(),
     );
