@@ -21,6 +21,11 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def mapApiKey = localProperties.getProperty('map.api.key');
+if(mapApiKey == null){
+    mapApiKey = 'KEY_NOT_FOUND'
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -34,7 +39,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        manifestPlaceholders = [mapsApiKey: "$System.env.MAP_API_KEY"]
+        manifestPlaceholders = [mapApiKey: mapApiKey]
         applicationId "com.ichigorg.cafe_review"
         minSdkVersion 21
         targetSdkVersion 30

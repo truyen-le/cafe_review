@@ -9,6 +9,7 @@ import 'features/cafe_list/cafe_list.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
+  print(dotenv.env);
   WidgetsFlutterBinding.ensureInitialized();
   await LocalDb().initLocalDb();
   LocalDb.registerAdapters();
