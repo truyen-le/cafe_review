@@ -264,7 +264,6 @@ class _PhotoReviewTile extends StatelessWidget {
 
                       final path = await Navigator.push(
                           context, TakePictureScreen.route(firstCamera));
-                      print(path);
                       if (path != null && onPhotoTaken != null) {
                         onPhotoTaken!(path);
                       }

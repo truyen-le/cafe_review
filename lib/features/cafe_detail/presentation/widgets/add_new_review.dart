@@ -17,8 +17,6 @@ class _AddNewReviewState extends State<AddNewReview> {
 
   void _addNewReview() {
     if (reviewType != null && reviewTitle != '') {
-      print(reviewTitle);
-      print(reviewType);
       switch (reviewType) {
         case ReviewType.checkbox:
           context
