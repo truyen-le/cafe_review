@@ -42,8 +42,8 @@ class CafeDetailBloc extends Bloc<CafeDetailEvent, CafeDetailState> {
     if (state is CafeDetailLoadingFinished) {
       final reviewDetails = state.review.details.toList();
       reviewDetails.add(event.reviewDetail);
-      await _repositories
-          .saveReview(state.review.copyWith(details: reviewDetails));
+      await _repositories.saveReview(
+          state.review.copyWith(details: reviewDetails, completed: false));
       yield state.copyWith.review(details: reviewDetails, completed: false);
     } else {
       throw Exception('Event is used in wrong state: ${state.runtimeType}');
