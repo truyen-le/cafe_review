@@ -5,7 +5,7 @@ import 'package:cafe_review/features/cafe_list/cafe_list.dart';
 
 void configureCafeListDependencies() async {
   getIt.registerSingleton<CafeListApi>(
-      CafeListApi(getIt.get<DioClient>(), NEAR_BY, API_KEY));
+      CafeListApi(getIt.get<DioClient>(), NEAR_BY, getApiKey()));
   getIt.registerSingleton<CafeListLocal>(CafeListLocal());
   getIt.registerSingleton(CafeListRepositories(
       getIt.get<CafeListApi>(), getIt.get<CafeListLocal>()));

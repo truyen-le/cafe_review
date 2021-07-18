@@ -15,3 +15,18 @@ class CafeDetailAddNewReview extends CafeDetailEvent
   const factory CafeDetailAddNewReview(ReviewDetail reviewDetail) =
       _CafeDetailAddNewReview;
 }
+
+@freezed
+class CafeDetailChangeReviewAt extends CafeDetailEvent
+    with _$CafeDetailChangeReviewAt {
+  const factory CafeDetailChangeReviewAt(
+      {required ReviewDetail reviewDetail,
+      required int index}) = _CafeDetailChangeReviewAt;
+}
+
+@freezed
+class CafeDetailCheckReviewCompletion extends CafeDetailEvent
+    with _$CafeDetailCheckReviewCompletion {
+  const factory CafeDetailCheckReviewCompletion() =
+      _CafeDetailCheckReviewCompletion;
+}

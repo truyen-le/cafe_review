@@ -1,4 +1,10 @@
-const API_KEY = 'AIzaSyA2U8Oyect3r_6vpZDc6uMea4awvODg-zQ';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+String getApiKey() {
+  final value = dotenv.env['MAP_API_KEY'];
+  if (value == null) throw Exception('Cannot find API Key in .env file');
+  return dotenv.env['MAP_API_KEY']!;
+}
 
 const ROOT_URL = 'https://maps.googleapis.com/maps/api/place';
 

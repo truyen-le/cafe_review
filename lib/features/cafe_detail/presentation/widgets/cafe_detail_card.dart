@@ -6,10 +6,13 @@ import 'package:flutter/material.dart';
 
 class CafeDetailCard extends StatelessWidget {
   final CafeDetail detail;
-  const CafeDetailCard({Key? key, required this.detail}) : super(key: key);
+  final bool completed;
+
+  const CafeDetailCard({Key? key, required this.detail, this.completed = false})
+      : super(key: key);
 
   String _getPhotoUrl(String reference,
-      {int maxWidth = 1080, int maxHeight = 600, String key = API_KEY}) {
+      {int maxWidth = 1080, int maxHeight = 600, required String key}) {
     return '$PHOTO?key=$key&photoreference=$reference&maxwidth=$maxWidth&maxheight=$maxHeight';
   }
 
@@ -25,7 +28,7 @@ class CafeDetailCard extends StatelessWidget {
               (photo) => Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: RoundedCornerImage(
-                  imageUrl: _getPhotoUrl(photo.reference),
+                  imageUrl: _getPhotoUrl(photo.reference, key: getApiKey()),
                 ),
               ),
             )
@@ -137,12 +140,39 @@ class CafeDetailCard extends StatelessWidget {
     );
   }
 
-  Widget _buildBottom(BuildContext context) {
+  Widget _buildBottom(BuildContext context, bool completed) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: completed ? AppColors.primary : Colors.transparent,
+              border: Border.all(
+                  color: completed ? AppColors.primary : AppColors.shade[40]!),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.check_circle_outline,
+                  color:
+                      completed ? AppColors.background : AppColors.shade[40]!,
+                ),
+                Text(
+                  ' ${!completed ? 'Not ' : ''}Completed',
+                  style: TextStyle(
+                    color:
+                        completed ? AppColors.background : AppColors.shade[40]!,
+                  ),
+                ),
+              ],
+            ),
+          ),
           ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
@@ -165,7 +195,7 @@ class CafeDetailCard extends StatelessWidget {
                     Icons.map,
                     color: AppColors.background,
                   ),
-                  Text(' Map'),
+                  Text(' View on Map'),
                 ],
               ),
             ),
@@ -188,7 +218,7 @@ class CafeDetailCard extends StatelessWidget {
                 : _buildDefaultImage(context),
             _buildDetailBody(context),
             Divider(),
-            _buildBottom(context),
+            _buildBottom(context, completed),
           ],
         ),
       ),

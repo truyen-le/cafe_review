@@ -36,9 +36,25 @@ class _AddNewReviewState extends State<AddNewReview> {
                 content: '',
               )));
           break;
+        case ReviewType.rating:
+          context
+              .read<CafeDetailBloc>()
+              .add(CafeDetailAddNewReview(ReviewByRating(
+                title: reviewTitle,
+                rating: 0.0,
+              )));
+          break;
+        case ReviewType.picture:
+          context
+              .read<CafeDetailBloc>()
+              .add(CafeDetailAddNewReview(ReviewByPhoto(title: reviewTitle)));
+          break;
         default:
           break;
       }
+      reviewTitle = '';
+      reviewType = null;
+      addNew = !addNew;
     }
   }
 
@@ -153,10 +169,8 @@ class _AddNewReviewState extends State<AddNewReview> {
           child: Center(
             child: Text(
               'New Review',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                  color: AppColors.primary, fontWeight: FontWeight.bold),
             ),
           ),
         ),

@@ -19,7 +19,7 @@ class CafeListCard extends StatelessWidget {
   }) : super(key: key);
 
   String _getPhotoUrl(String reference,
-      {int maxWidth = 1080, int maxHeight = 600, String key = API_KEY}) {
+      {int maxWidth = 1080, int maxHeight = 600, required String key}) {
     return '$PHOTO?key=$key&photoreference=$reference&maxwidth=$maxWidth&maxheight=$maxHeight';
   }
 
@@ -35,7 +35,8 @@ class CafeListCard extends StatelessWidget {
             children: [
               detail.photos != null
                   ? RoundedCornerImage(
-                      imageUrl: _getPhotoUrl(detail.photos![0].reference),
+                      imageUrl: _getPhotoUrl(detail.photos![0].reference,
+                          key: getApiKey()),
                     )
                   : DefaultRoundedCornerImage(),
               Padding(

@@ -62,3 +62,21 @@ class ReviewByWriting extends ReviewDetail with _$ReviewByWriting {
     @HiveField(1) required String content,
   }) = _ReviewByWriting;
 }
+
+@freezed
+class ReviewByRating extends ReviewDetail with _$ReviewByRating {
+  @HiveType(typeId: 10, adapterName: 'ReviewByRatingAdapter')
+  const factory ReviewByRating({
+    @HiveField(0) required String title,
+    @HiveField(1) required double rating,
+  }) = _ReviewByRating;
+}
+
+@freezed
+class ReviewByPhoto extends ReviewDetail with _$ReviewByPhoto {
+  @HiveType(typeId: 11, adapterName: 'ReviewByPhotoAdapter')
+  const factory ReviewByPhoto({
+    @HiveField(0) required String title,
+    @HiveField(1) String? path,
+  }) = _ReviewByPhoto;
+}

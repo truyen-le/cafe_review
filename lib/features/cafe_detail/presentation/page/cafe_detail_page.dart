@@ -69,7 +69,11 @@ class CafeDetailPage extends StatelessWidget {
             child: Container(
               child: Column(
                 children: [
-                  CafeDetailCard(detail: state.detail),
+                  CafeDetailCard(
+                    detail: state.detail,
+                    completed: state.review.completed,
+                  ),
+                  ReviewList(review: state.review),
                   AddNewReview(),
                 ],
               ),
@@ -99,7 +103,10 @@ class CafeDetailPage extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: _buildBody(context),
+        body: GestureDetector(
+          child: _buildBody(context),
+          onTap: () => FocusScope.of(context).unfocus(),
+        ),
       ),
     );
   }

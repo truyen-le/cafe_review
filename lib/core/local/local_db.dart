@@ -21,6 +21,8 @@ class LocalDb {
     Hive.registerAdapter(ReviewDetailAdapter());
     Hive.registerAdapter(ReviewByCheckboxAdapter());
     Hive.registerAdapter(ReviewByWritingAdapter());
+    Hive.registerAdapter(ReviewByRatingAdapter());
+    Hive.registerAdapter(ReviewByPhotoAdapter());
   }
 
   void closeLocalDb() {
